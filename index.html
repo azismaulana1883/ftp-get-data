@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto File Transfer</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<script>
+$(document).ready(function() {
+    // Fungsi untuk mentransfer file ke server FTP
+    function transferFilesToFTP() {
+        $.ajax({
+            url: 'getdata.php', // Ganti dengan path yang benar jika berbeda
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+    // Transfer file pertama kali ketika dokumen dijalankan
+    transferFilesToFTP();
+
+    // Atur interval untuk mentransfer file setiap 5 menit
+    setInterval(function() {
+        transferFilesToFTP();
+    }, 10 * 60 * 1000); // 5 menit * 60 detik * 1000 milidetik
+});
+</script>
+
+</body>
+</html>
